@@ -15,7 +15,7 @@
   // CONFIGURATION & PERSONALIZATION DATA
   const CONFIG = {
     birthdayName: "Aruna",
-    senderName: "Your Friend 💌",
+    senderName: "Aadi 💌",
     letterText: `Happy Birthday, Aruna! 💗
 
 I hope your special day brings you endless smiles, beautiful memories, and all the happiness your heart can hold.
@@ -29,7 +29,7 @@ Thank you for being such a wonderful friend. I hope your birthday is as special 
 Stay happy, stay blessed, and keep smiling always. ✨
 
 With lots of best wishes and friendship,
-Your Friend 💌`
+Aadi 💌`
   };
 
   // GLOBAL STATE
