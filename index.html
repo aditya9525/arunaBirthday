@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday, Aruna! 🎂✨</title>
+  <meta name="description" content="A magical, interactive birthday surprise experience created for Aruna with love.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- GSAP for smooth animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+  <!-- Ambient Audio Controller -->
+  <button id="audio-toggle" class="audio-btn" aria-label="Toggle background music">
+    <div class="audio-icon-wrap">
+      <span class="icon-sound-on">🎵</span>
+      <span class="icon-sound-off hidden">🔇</span>
+    </div>
+    <span class="audio-label">Music: On</span>
+    <div class="sound-waves">
+      <span></span><span></span><span></span>
+    </div>
+  </button>
+
+  <!-- Fullscreen Particle Canvases -->
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="celebration-canvas"></canvas>
+
+  <!-- Main Application Container -->
+  <main id="app">
+
+    <!-- STAGE 1: Welcome Home Screen -->
+    <section id="stage-1" class="stage active">
+      <div class="welcome-card glass-panel">
+        <div class="sparkle-crown">✨ 👑 ✨</div>
+        
+        <!-- Elegant Photo Frame for Aruna -->
+        <div class="portrait-frame-wrapper">
+          <div class="portrait-glow"></div>
+          <div class="portrait-frame">
+            <img src="aruna.jpg" alt="Aruna - Birthday Girl" class="portrait-img">
+          </div>
+          <div class="portrait-badge">💗</div>
+        </div>
+
+        <h1 class="glow-title">Happy Birthday,<br><span class="name-highlight">Dearest Aruna!</span> 🎂</h1>
+        <p class="welcome-subtitle">A special magical surprise crafted just for you on your special day.</p>
+        
+        <div class="gift-box-preview">
+          <div class="floating-gift">🎁</div>
+          <div class="pulse-ring"></div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary pulse-btn">
+          <span>Open Your Surprise 💗</span>
+          <div class="btn-sparkles"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- STAGE 2: Interactive Cake & Lighter -->
+    <section id="stage-2" class="stage hidden-stage">
+      <div class="stage-header">
+        <span class="step-badge">Step 1</span>
+        <h2>Light the Birthday Candles 🕯️</h2>
+        <p class="instruction-text">Tap the golden lighter to spark the flames!</p>
+      </div>
+
+      <div class="cake-display-wrapper" id="cake-display-wrapper">
+        <!-- 3D Style Cake pedestal & cake -->
+        <div class="cake-container" id="cake-container">
+          <div class="cake-shadow"></div>
+          
+          <!-- Cake Pedestal Stand -->
+          <div class="pedestal-top"></div>
+          <div class="pedestal-base"></div>
+
+          <!-- Cake Structure -->
+          <div class="cake" id="cake-element">
+            <!-- Top Frosting Tier -->
+            <div class="cake-tier tier-top">
+              <div class="frosting-drips">
+                <span class="drip"></span><span class="drip"></span><span class="drip"></span>
+                <span class="drip"></span><span class="drip"></span><span class="drip"></span>
+              </div>
+              <div class="decorations">
+                <span class="berry">🍓</span>
+                <span class="rose">🌹</span>
+                <span class="berry">🍓</span>
+                <span class="rose">🌹</span>
+              </div>
+            </div>
+
+            <!-- Bottom Cake Tier -->
+            <div class="cake-tier tier-bottom">
+              <div class="frosting-pearls">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <!-- Cut Slice overlay (Hidden until cut) -->
+            <div class="cake-slice" id="cake-slice">
+              <div class="slice-inner"></div>
+            </div>
+
+            <!-- Dashed Cut Guide Line -->
+            <div class="cut-guide-line" id="cut-guide">
+              <span class="guide-sparkle">✨</span>
+            </div>
+
+            <!-- Candles on Top -->
+            <div class="candles-group" id="candles-group">
+              <div class="candle" id="candle-1" data-index="0">
+                <div class="flame-container">
+                  <div class="flame"></div>
+                  <div class="flame-glow"></div>
+                  <div class="smoke"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body stripe-pink"></div>
+              </div>
+
+              <div class="candle" id="candle-2" data-index="1">
+                <div class="flame-container">
+                  <div class="flame"></div>
+                  <div class="flame-glow"></div>
+                  <div class="smoke"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body stripe-gold"></div>
+              </div>
+
+              <div class="candle" id="candle-3" data-index="2">
+                <div class="flame-container">
+                  <div class="flame"></div>
+                  <div class="flame-glow"></div>
+                  <div class="smoke"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body stripe-purple"></div>
+              </div>
+
+              <div class="candle" id="candle-4" data-index="3">
+                <div class="flame-container">
+                  <div class="flame"></div>
+                  <div class="flame-glow"></div>
+                  <div class="smoke"></div>
+                </div>
+                <div class="wick"></div>
+                <div class="candle-body stripe-rose"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Golden Lighter -->
+        <div class="lighter-wrapper" id="lighter-wrapper">
+          <div id="lighter" class="lighter-device" role="button" tabindex="0" aria-label="Click to ignite candles">
+            <div class="lighter-lid"></div>
+            <div class="lighter-flint">⚡</div>
+            <div class="lighter-flame" id="lighter-flame">
+              <div class="l-fire"></div>
+              <div class="l-glow"></div>
+            </div>
+            <div class="lighter-body">
+              <div class="lighter-brand">✨ 👑</div>
+              <div class="lighter-glow-ring"></div>
+            </div>
+          </div>
+          <div class="lighter-hint">Tap me! 🔥</div>
+        </div>
+      </div>
+
+      <div class="stage-footer">
+        <button id="auto-light-btn" class="btn btn-secondary btn-sm">
+          <span>Auto Light Candles ✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STAGE 3: Make a Wish Modal Banner (Triggers automatically after candles lit) -->
+    <div id="wish-modal" class="modal-overlay hidden">
+      <div class="wish-card glass-panel">
+        <div class="wish-stars">✨ 🌟 ✨</div>
+        <h2 class="wish-title">Make a Wish! 💫</h2>
+        <p class="wish-text">Close your eyes, make a special birthday wish, and blow out the candles in your heart...</p>
+        <button id="wish-done-btn" class="btn btn-primary pulse-btn">
+          <span>I've Made My Wish! 💖</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STAGE 4: Cake Cutting Stage -->
+    <section id="stage-4" class="stage hidden-stage">
+      <div class="stage-header">
+        <span class="step-badge">Step 2</span>
+        <h2>Cut Your Birthday Cake! 🎂</h2>
+        <p class="instruction-text">Drag the golden knife across the cake to cut a slice!</p>
+      </div>
+
+      <div class="cutting-scene" id="cutting-scene">
+        <!-- Re-used Cake View for Cutting -->
+        <div id="cutting-cake-anchor"></div>
+
+        <!-- Draggable Knife Element -->
+        <div id="draggable-knife" class="knife-tool" role="slider" aria-label="Drag knife to cut cake">
+          <div class="knife-blade">
+            <div class="knife-shine"></div>
+          </div>
+          <div class="knife-guard"></div>
+          <div class="knife-handle">
+            <span class="handle-gem">💎</span>
+          </div>
+          <div class="knife-drag-hint">
+            <span>Drag Me 🔪</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-footer">
+        <button id="fallback-cut-btn" class="btn btn-primary pulse-btn">
+          <span>Cut Cake Slice 🔪</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STAGE 5: Envelope & Birthday Letter Reveal -->
+    <section id="stage-5" class="stage hidden-stage">
+      <div class="stage-header">
+        <span class="step-badge">Final Surprise</span>
+        <h2>A Special Message For You 💌</h2>
+        <p class="instruction-text">Tap the envelope to open your letter!</p>
+      </div>
+
+      <div class="envelope-scene">
+        <div id="envelope" class="envelope-container" role="button" tabindex="0" aria-label="Open birthday letter envelope">
+          <div class="envelope-back"></div>
+          <div class="envelope-paper-peek">
+            <p>Happy Birthday, Aruna! 💗</p>
+          </div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-front"></div>
+          <div class="wax-seal" id="wax-seal">
+            <span class="seal-heart">💖</span>
+            <span class="seal-glow"></span>
+          </div>
+          <div class="envelope-sparkles"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULLSCREEN LETTER MODAL STATIONERY -->
+    <div id="letter-modal" class="letter-modal-overlay hidden">
+      <div class="letter-paper stationery-panel">
+        <button id="close-letter-btn" class="close-letter-x" aria-label="Close letter">×</button>
+        
+        <div class="stationery-header">
+          <div class="floral-corner top-left">🌸</div>
+          <div class="header-photo-wrap">
+            <img src="aruna.jpg" alt="Aruna" class="header-photo-img">
+          </div>
+          <button id="font-toggle-btn" class="font-toggle-btn" title="Toggle font readability style">
+            <span>Font: Clean 🔤</span>
+          </button>
+          <div class="stamp-seal">🎂</div>
+        </div>
+
+        <div class="letter-scroll-area">
+          <h2 class="letter-salutation">Happy Birthday, Aruna! 💗</h2>
+          
+          <div class="letter-content" id="letter-content-body">
+            <!-- Typed dynamically or line-by-line -->
+          </div>
+
+          <div class="letter-signature">
+            <p class="sig-closing">With lots of best wishes and friendship,</p>
+            <p class="sig-name">Your Friend 💌</p>
+          </div>
+        </div>
+
+        <div class="stationery-footer">
+          <div class="floral-corner bottom-left">🌸</div>
+          <div class="floral-corner bottom-right">🌸</div>
+          <div class="letter-actions">
+            <button id="replay-btn" class="btn btn-secondary">
+              <span>Replay the Surprise 🔄</span>
+            </button>
+            <button id="share-love-btn" class="btn btn-primary btn-sm">
+              <span>Send Hugs & Thanks 🤗</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Celebration Overlay Banner -->
+    <div id="final-toast" class="final-toast hidden">
+      <div class="toast-content">
+        <span class="toast-icon">🎉</span>
+        <span class="toast-text">Happy Birthday Once Again, Aruna! 🎂💖</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
